@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Respected Prakash Sir! 🎂✨</title>
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS & Confetti Engine -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            gold24k: '#D4AF37',
+            goldChampagne: '#F3E5AB',
+            goldDeep: '#996515',
+            obsidian: '#05070B',
+            obsidianDeep: '#080C14',
+            obsidianCard: '#0D1424',
+            ivoryBg: '#FAF8F2',
+            ivoryCard: '#FFFFFF',
+          },
+          fontFamily: {
+            cinzelDeco: ['"Cinzel Decorative"', 'serif'],
+            cinzel: ['"Cinzel"', 'serif'],
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            syne: ['"Syne"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    /* Dynamic ambient glows */
+    .ambient-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .dark .ambient-glow {
+      background: 
+        radial-gradient(circle at 50% 12%, rgba(212, 175, 55, 0.12) 0%, transparent 55%),
+        radial-gradient(circle at 85% 80%, rgba(243, 229, 171, 0.05) 0%, transparent 45%),
+        radial-gradient(circle at 15% 85%, rgba(153, 101, 21, 0.08) 0%, transparent 45%);
+    }
+
+    html:not(.dark) .ambient-glow {
+      background: 
+        radial-gradient(circle at 50% 10%, rgba(212, 175, 55, 0.16) 0%, transparent 60%),
+        radial-gradient(circle at 85% 85%, rgba(243, 229, 171, 0.28) 0%, transparent 50%),
+        radial-gradient(circle at 15% 75%, rgba(212, 175, 55, 0.12) 0%, transparent 50%);
+    }
+
+    #stardustCanvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Glassmorphism */
+    .card-glass {
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+
+    .dark .card-glass {
+      background: linear-gradient(150deg, rgba(13, 20, 36, 0.88) 0%, rgba(6, 10, 18, 0.95) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.28);
+      box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.8), 0 0 45px rgba(212, 175, 55, 0.06);
+    }
+
+    html:not(.dark) .card-glass {
+      background: linear-gradient(150deg, rgba(255, 255, 255, 0.96) 0%, rgba(250, 248, 242, 0.98) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      box-shadow: 0 25px 50px -10px rgba(153, 101, 21, 0.12), 0 0 35px rgba(212, 175, 55, 0.12);
+    }
+
+    /* Metallic Gold Foil Border */
+    .foil-gold {
+      position: relative;
+    }
+    .foil-gold::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255, 248, 220, 0.85) 0%, rgba(212, 175, 55, 0.35) 50%, rgba(153, 101, 21, 0.85) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    /* Gold typography gradients */
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FFF9E6 10%, #E6C265 50%, #B8860B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    html:not(.dark) .gold-gradient-text {
+      background: linear-gradient(135deg, #664407 0%, #B8860B 55%, #4A3305 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* 3D Wax Seal Entrance */
+    .wax-seal {
+      background: radial-gradient(circle at 35% 30%, #FFE082 0%, #D4AF37 40%, #AA771C 75%, #503807 100%);
+      box-shadow: 
+        0 14px 40px rgba(0, 0, 0, 0.45),
+        0 0 40px rgba(212, 175, 55, 0.45),
+        inset 2px 2px 5px rgba(255, 255, 255, 0.7),
+        inset -2px -2px 6px rgba(0, 0, 0, 0.75);
+      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s ease;
+    }
+    .wax-seal:hover {
+      transform: scale(1.06) rotate(1.5deg);
+      box-shadow: 
+        0 18px 50px rgba(0, 0, 0, 0.55),
+        0 0 55px rgba(212, 175, 55, 0.65);
+    }
+
+    /* Candle flame animation */
+    .candle-flame {
+      width: 14px;
+      height: 24px;
+      background: radial-gradient(circle at 50% 80%, #FFFFFF 0%, #FFE57F 35%, #FF9100 65%, #FF3D00 90%);
+      border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+      filter: drop-shadow(0 0 8px #FFB300) drop-shadow(0 0 20px rgba(255, 111, 0, 0.7));
+      animation: waver 0.75s infinite alternate ease-in-out;
+      transition: all 0.45s ease;
+    }
+    .candle-flame.snuffed {
+      opacity: 0;
+      transform: translateY(-12px) scale(0.1);
+      filter: blur(4px);
+    }
+
+    @keyframes waver {
+      0% { transform: scale(1) rotate(-2deg); }
+      50% { transform: scale(1.06) rotate(1.5deg); }
+      100% { transform: scale(0.96) rotate(2.5deg); }
+    }
+
+    /* Toast Notification */
+    .toast-pill {
+      transform: translateY(140%);
+      opacity: 0;
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .toast-pill.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-ivoryBg dark:bg-obsidian text-slate-800 dark:text-slate-100 min-h-screen selection:bg-gold24k selection:text-black font-sans">
+
+  <!-- Ambient Lights & Particles -->
+  <div class="ambient-glow"></div>
+  <canvas id="stardustCanvas"></canvas>
+
+  <!-- ============================================================ -->
+  <!-- TOP CONTROLS & IDENTITY HEADER                               -->
+  <!-- ============================================================ -->
+  <header class="relative z-30 max-w-4xl mx-auto px-5 pt-6 pb-3 flex items-center justify-between">
+    <!-- Monogram Emblem -->
+    <div class="flex items-center gap-3">
+      <div class="w-11 h-11 rounded-full p-[1.5px] bg-gradient-to-tr from-gold24k via-amber-200 to-amber-700 shadow-md">
+        <div class="w-full h-full rounded-full bg-white dark:bg-obsidian flex items-center justify-center font-cinzelDeco font-black text-xs text-amber-900 dark:text-goldChampagne">
+          PK
+        </div>
+      </div>
+      <div>
+        <h2 class="text-xs font-cinzel tracking-wider font-bold text-amber-950 dark:text-goldChampagne">
+          MR. PRAKASH KUMAR
+        </h2>
+        <p class="text-[10px] font-mono tracking-widest text-slate-500 dark:text-slate-400">
+          OCTOBER 20TH • WISHES FROM THILIPKUMAR
+        </p>
+      </div>
+    </div>
+
+    <!-- Quick Action Controls -->
+    <div class="flex items-center gap-2">
+      <!-- Light / Dark Mode Toggle -->
+      <button onclick="toggleTheme()" id="themeBtn" aria-label="Toggle Theme" class="p-2.5 rounded-full bg-white/90 dark:bg-white/5 border border-amber-900/15 dark:border-white/10 text-amber-900 dark:text-goldChampagne hover:scale-105 transition shadow-sm">
+        <span id="themeIcon" class="text-sm">🌙</span>
+      </button>
+
+      <!-- Audio Fanfare Toggle -->
+      <button onclick="toggleAudio()" id="audioBtn" aria-label="Toggle Sound" class="p-2.5 rounded-full bg-white/90 dark:bg-white/5 border border-amber-900/15 dark:border-white/10 text-amber-900 dark:text-goldChampagne hover:scale-105 transition shadow-sm">
+        <span id="audioIcon" class="text-sm">🔊</span>
+      </button>
+
+      <!-- Photo Manager Modal -->
+      <button onclick="openPhotoModal()" class="px-3.5 py-1.5 rounded-full bg-amber-500/10 dark:bg-gold24k/15 border border-amber-600/30 dark:border-gold24k/40 text-amber-900 dark:text-goldChampagne hover:bg-amber-500/20 text-xs font-mono transition flex items-center gap-1.5 shadow-sm">
+        <span>📸</span>
+        <span class="font-semibold">Add Photos</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- 1. ROYAL WAX SEAL UNBOXING ENTRANCE                          -->
+  <!-- ============================================================ -->
+  <section id="envelopeGate" class="relative z-20 flex-1 flex items-center justify-center px-4 py-10 min-h-[82vh]">
+    <div id="gateCard" class="relative max-w-xl w-full card-glass rounded-3xl p-8 sm:p-12 text-center foil-gold transition-all duration-700 shadow-2xl">
+      
+      <!-- Laurel Tag -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 dark:bg-gold24k/10 border border-amber-600/30 dark:border-gold24k/30 text-amber-900 dark:text-goldChampagne text-xs font-mono mb-6">
+        <span class="w-2 h-2 rounded-full bg-gold24k animate-pulse"></span>
+        ROYAL BIRTHDAY ENVELOPE • 20TH OCTOBER
+      </div>
+
+      <!-- Addressed Header -->
+      <div class="space-y-2 mb-8">
+        <p class="text-[11px] font-mono tracking-[0.25em] uppercase text-amber-700 dark:text-cyan-400 font-semibold">
+          Warmest Birthday Greetings To
+        </p>
+        <h1 class="text-3xl sm:text-5xl font-cinzel font-bold text-slate-900 dark:text-white tracking-wide">
+          Mr. Prakash Kumar
+        </h1>
+        <p class="text-xs sm:text-sm font-serif italic text-slate-600 dark:text-goldChampagne/90 tracking-wider mt-1">
+          Respected Boss & Inspiring Mentor
+        </p>
+      </div>
+
+      <!-- 3D Wax Seal Button -->
+      <div class="relative my-8 flex flex-col items-center justify-center">
+        <div class="absolute -inset-8 bg-gold24k/20 rounded-full blur-2xl pointer-events-none"></div>
+
+        <button onclick="openExecutiveCard()" class="wax-seal relative w-36 h-36 rounded-full flex flex-col items-center justify-center cursor-pointer group active:scale-95">
+          <div class="w-[124px] h-[124px] rounded-full border-2 border-dashed border-amber-950/40 flex flex-col items-center justify-center p-2 text-center">
+            <svg class="w-6 h-4 text-amber-950 mb-0.5 opacity-80" viewBox="0 0 24 16" fill="currentColor">
+              <path d="M12 2C8 2 4 6 2 10C5 9 8 8 10 6C9 9 7 12 5 14C8 13 11 11 12 8C13 11 16 13 19 14C17 12 15 9 14 6C16 8 19 9 22 10C20 6 16 2 12 2Z"/>
+            </svg>
+            <span class="font-cinzelDeco font-black text-4xl text-amber-950 drop-shadow-sm tracking-wider">PK</span>
+            <span class="text-[8px] font-mono tracking-widest text-amber-950 font-bold uppercase mt-1">20TH OCTOBER</span>
+            <span class="text-[8px] font-mono text-amber-900 font-semibold tracking-wider">TAP TO OPEN</span>
+          </div>
+        </button>
+
+        <p class="text-xs font-mono text-slate-500 dark:text-slate-400 mt-6 tracking-wide flex items-center gap-2">
+          <span>✨</span> Tap wax seal to unveil your personal birthday card
+        </p>
+      </div>
+
+      <div class="pt-5 border-t border-slate-200 dark:border-white/10 flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400">
+        <span>From: Thilipkumar</span>
+        <span class="text-amber-800 dark:text-goldChampagne font-semibold tracking-wider">ESTEEM & GRATITUDE</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 2. MAIN DIGITAL GREETING CARD (Unveiled on Opening)          -->
+  <!-- ============================================================ -->
+  <main id="mainCardSection" class="relative z-10 max-w-4xl mx-auto px-4 py-8 space-y-10 hidden opacity-0 transition-opacity duration-700">
+
+    <!-- LIVE CELEBRATION COUNTDOWN -->
+    <div class="card-glass rounded-2xl p-4 sm:p-5 foil-gold text-center">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="text-left">
+          <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-amber-700 dark:text-cyan-400 font-semibold">CELEBRATION MILESTONE</span>
+          <h3 class="text-base sm:text-lg font-cinzel font-bold text-slate-900 dark:text-white">Birthday Commemoration • 20th October</h3>
+        </div>
+        <div class="flex items-center gap-3 font-mono">
+          <div class="bg-amber-50 dark:bg-obsidianDeep px-3.5 py-1.5 rounded-lg border border-amber-900/15 dark:border-gold24k/20 text-center">
+            <span id="cDays" class="text-lg sm:text-xl font-bold text-amber-900 dark:text-goldChampagne">00</span>
+            <span class="text-[9px] block text-slate-500 dark:text-slate-400">DAYS</span>
+          </div>
+          <span class="text-gold24k font-bold">:</span>
+          <div class="bg-amber-50 dark:bg-obsidianDeep px-3.5 py-1.5 rounded-lg border border-amber-900/15 dark:border-gold24k/20 text-center">
+            <span id="cHours" class="text-lg sm:text-xl font-bold text-amber-900 dark:text-goldChampagne">00</span>
+            <span class="text-[9px] block text-slate-500 dark:text-slate-400">HOURS</span>
+          </div>
+          <span class="text-gold24k font-bold">:</span>
+          <div class="bg-amber-50 dark:bg-obsidianDeep px-3.5 py-1.5 rounded-lg border border-amber-900/15 dark:border-gold24k/20 text-center">
+            <span id="cMins" class="text-lg sm:text-xl font-bold text-amber-900 dark:text-goldChampagne">00</span>
+            <span class="text-[9px] block text-slate-500 dark:text-slate-400">MINS</span>
+          </div>
+          <span class="text-gold24k font-bold">:</span>
+          <div class="bg-amber-50 dark:bg-obsidianDeep px-3.5 py-1.5 rounded-lg border border-amber-900/15 dark:border-gold24k/20 text-center">
+            <span id="cSecs" class="text-lg sm:text-xl font-bold text-amber-900 dark:text-goldChampagne">00</span>
+            <span class="text-[9px] block text-slate-500 dark:text-slate-400">SECS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THE GRAND EXECUTIVE GREETING CARD -->
+    <article class="card-glass rounded-3xl p-6 sm:p-12 foil-gold relative overflow-hidden shadow-2xl">
+      
+      <!-- Subtle Watermark -->
+      <div class="absolute -right-6 -bottom-10 opacity-[0.03] dark:opacity-[0.045] select-none pointer-events-none font-cinzelDeco text-[260px] text-amber-900 dark:text-gold24k leading-none">
+        PK
+      </div>
+
+      <!-- Title & Laurels -->
+      <div class="text-center pb-8 border-b border-slate-200 dark:border-white/10 space-y-2">
+        <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-amber-500/10 dark:bg-gold24k/10 border border-amber-600/30 dark:border-gold24k/30 text-amber-900 dark:text-goldChampagne text-xs font-mono">
+          👑 BESPOKE BIRTHDAY TRIBUTE
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-cinzel font-bold text-slate-900 dark:text-white tracking-tight mt-2">
+          Happy Birthday, <span class="gold-gradient-text">Prakash Sir!</span>
+        </h2>
+        <p class="text-xs sm:text-sm font-mono tracking-widest uppercase text-amber-800 dark:text-cyan-400">
+          TO AN EXTRAORDINARY LEADER, MENTOR & GUIDE
+        </p>
+      </div>
+
+      <!-- Photo 1: Hero Bevel Frame & Letter Content -->
+      <div class="py-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Primary Photo Frame (Hero: Executive Tuxedo) -->
+        <div class="lg:col-span-5 flex flex-col items-center">
+          <div class="relative w-full max-w-[280px] aspect-[4/5] rounded-2xl p-[2px] bg-gradient-to-b from-amber-300 via-gold24k to-amber-900 shadow-2xl group">
+            <div class="w-full h-full rounded-[14px] overflow-hidden bg-black relative flex items-center justify-center">
+              
+              <!-- Photo 1 Display Element -->
+              <img id="photoSlot1" src="" alt="Mr. Prakash Kumar - Executive Tuxedo" class="w-full h-full object-cover object-top transition duration-500 group-hover:scale-105" />
+
+              <!-- Overlay Camera Trigger (Click to change immediately) -->
+              <label class="absolute inset-0 bg-black/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all flex flex-col items-center justify-center cursor-pointer text-white text-xs font-mono gap-1 z-20">
+                <span class="text-2xl">📸</span>
+                <span class="bg-black/70 px-3 py-1 rounded-full border border-gold24k/40">Change Photo</span>
+                <input type="file" accept="image/*" class="hidden" onchange="uploadPhotoDirect(this, 'boss_photo_hero', 'photoSlot1')">
+              </label>
+
+            </div>
+          </div>
+          <span class="text-[11px] font-mono text-slate-500 dark:text-slate-400 mt-3 tracking-wider font-semibold">MR. PRAKASH KUMAR</span>
+        </div>
+
+        <!-- The Personal Heartfelt Message -->
+        <div class="lg:col-span-7 space-y-6 text-slate-700 dark:text-slate-200 text-base sm:text-lg leading-relaxed font-sans font-light">
+          
+          <div class="space-y-1">
+            <h3 class="font-serif italic text-2xl sm:text-3xl text-amber-900 dark:text-goldChampagne font-semibold">
+              Respected Prakash Sir,
+            </h3>
+            <p class="text-xl sm:text-2xl font-serif text-slate-900 dark:text-white font-medium">
+              Wishing you a very Happy Birthday! 🎂✨
+            </p>
+          </div>
+
+          <p class="leading-relaxed">
+            It is an absolute privilege to work under your visionary leadership and guidance. Your strategic clarity, wisdom, and the confidence you place in me inspire my commitment to deliver excellence every single day.
+          </p>
+
+          <p class="leading-relaxed">
+            Thank you for always being a pillar of strong mentorship, steadfast support, and guidance.
+          </p>
+
+          <p class="leading-relaxed font-medium text-slate-900 dark:text-white">
+            Wishing you abundant health, lasting happiness, peace of mind, and continued grand success in all your future endeavors.
+          </p>
+
+          <p class="leading-relaxed font-medium text-amber-900 dark:text-goldChampagne">
+            Have a truly wonderful and memorable celebration, Sir!
+          </p>
+
+          <!-- Executive Signoff -->
+          <div class="pt-6 border-t border-slate-200 dark:border-white/10">
+            <p class="text-xs font-mono text-slate-500 dark:text-slate-400 tracking-widest uppercase">With highest respect & warm regards,</p>
+            <div class="font-serif italic font-bold text-3xl sm:text-4xl text-amber-900 dark:text-goldChampagne mt-1">
+              Thilipkumar
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+    <!-- ============================================================ -->
+    <!-- 3. CELEBRATION SUITE (Interactive Cake & Scratch Blessing)  -->
+    <!-- ============================================================ -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <!-- 3-Tier Virtual Celebration Cake -->
+      <div class="card-glass rounded-3xl p-6 sm:p-8 text-center flex flex-col items-center justify-between foil-gold">
+        <div>
+          <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-amber-700 dark:text-cyan-400 font-semibold">CELEBRATION RITUAL</span>
+          <h3 class="text-xl sm:text-2xl font-cinzel font-bold text-slate-900 dark:text-white mt-1">Virtual Birthday Cake</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Tap individual flames or click below to blow all candles!</p>
+        </div>
+
+        <div class="my-8 relative select-none">
+          <!-- 3 Gold Candles -->
+          <div class="flex justify-center gap-8 -mb-1 relative z-10">
+            <div onclick="snuffCandle(0)" class="cursor-pointer group">
+              <div id="candleFlame0" class="candle-flame mx-auto mb-1"></div>
+              <div class="w-3.5 h-10 bg-gradient-to-t from-amber-700 via-gold24k to-white rounded-t-sm shadow-md"></div>
+            </div>
+            <div onclick="snuffCandle(1)" class="cursor-pointer group">
+              <div id="candleFlame1" class="candle-flame mx-auto mb-1"></div>
+              <div class="w-3.5 h-12 bg-gradient-to-t from-amber-900 via-amber-400 to-white rounded-t-sm shadow-md"></div>
+            </div>
+            <div onclick="snuffCandle(2)" class="cursor-pointer group">
+              <div id="candleFlame2" class="candle-flame mx-auto mb-1"></div>
+              <div class="w-3.5 h-10 bg-gradient-to-t from-amber-700 via-gold24k to-white rounded-t-sm shadow-md"></div>
+            </div>
+          </div>
+
+          <!-- 3 Cake Tiers -->
+          <div class="w-32 h-9 mx-auto rounded-t-lg bg-gradient-to-r from-amber-700 via-gold24k to-amber-700 flex items-center justify-center text-[10px] font-mono font-bold text-black shadow-md border-t border-white/40">
+            LEADERSHIP
+          </div>
+          <div class="w-48 h-12 mx-auto bg-gradient-to-r from-amber-100 dark:from-slate-900 via-amber-50 dark:via-slate-800 to-amber-100 dark:to-slate-900 border-x border-gold24k/40 flex items-center justify-center text-xs font-cinzel font-bold text-amber-900 dark:text-goldChampagne shadow-inner">
+            MR. PRAKASH KUMAR
+          </div>
+          <div class="w-64 h-14 mx-auto rounded-b-2xl bg-gradient-to-r from-amber-200 dark:from-obsidian via-amber-100 dark:via-obsidianDeep to-amber-200 dark:to-obsidian border border-gold24k/40 flex items-center justify-center text-xs font-mono text-amber-900 dark:text-cyan-400 tracking-widest shadow-xl">
+            20TH OCTOBER • CELEBRATION
+          </div>
+          <div class="w-72 h-3 rounded-full bg-gradient-to-r from-amber-700 via-goldChampagne to-amber-700 mx-auto -mt-1 shadow-lg"></div>
+        </div>
+
+        <button onclick="blowAllCandles()" class="w-full py-3 rounded-xl bg-gradient-to-r from-gold24k via-amber-300 to-goldDeep text-black font-cinzel font-bold text-xs tracking-wider hover:brightness-110 active:scale-95 transition shadow-md">
+          🎂 Make a Wish & Blow All Candles
+        </button>
+      </div>
+
+      <!-- 24K Gold Scratch Card -->
+      <div class="card-glass rounded-3xl p-6 sm:p-8 flex flex-col justify-between foil-gold">
+        <div>
+          <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-amber-800 dark:text-goldChampagne font-semibold">SECRET COMMENDATION</span>
+          <h3 class="text-xl sm:text-2xl font-cinzel font-bold text-slate-900 dark:text-white mt-1">Golden Scratch Blessing</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Scratch the gold coating with mouse or finger to reveal</p>
+        </div>
+
+        <div class="relative w-full h-48 my-4 rounded-2xl overflow-hidden border border-gold24k/30 shadow-inner">
+          <!-- Hidden Greeting Layer -->
+          <div class="absolute inset-0 bg-gradient-to-br from-amber-50 dark:from-obsidianDeep via-white dark:via-obsidianCard to-amber-50 dark:to-obsidian flex flex-col items-center justify-center p-5 text-center select-none">
+            <span class="text-3xl mb-1">👑</span>
+            <h4 class="font-cinzel font-bold text-amber-900 dark:text-goldChampagne text-base sm:text-lg">To an Inspiring Mentor & Guide</h4>
+            <p class="text-xs sm:text-sm font-serif italic text-slate-700 dark:text-cyan-400 mt-1">May this year bring you grand milestones, robust health, and lasting joy!</p>
+          </div>
+
+          <!-- Interactive Scratch Canvas -->
+          <canvas id="scratchCanvas" class="absolute inset-0 z-10 cursor-crosshair w-full h-full"></canvas>
+        </div>
+
+        <button onclick="revealScratch()" class="w-full py-2.5 rounded-xl bg-amber-500/10 dark:bg-white/5 hover:bg-amber-500/20 dark:hover:bg-white/10 border border-amber-900/15 dark:border-white/15 text-xs font-mono text-amber-900 dark:text-goldChampagne transition">
+          ✨ Reveal Blessing
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 4. GALLERY: GALLERY 1 & 2 EMBEDDED ACCURATELY               -->
+    <!-- ============================================================ -->
+    <div class="card-glass rounded-3xl p-6 sm:p-10 foil-gold space-y-6">
+      
+      <div class="flex items-center justify-between">
+        <div>
+          <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-amber-800 dark:text-goldChampagne font-semibold">LEADERSHIP & WARMTH</span>
+          <h3 class="text-xl sm:text-2xl font-cinzel font-bold text-slate-900 dark:text-white mt-1">Moments of Inspiration</h3>
+        </div>
+        <button onclick="openPhotoModal()" class="px-3.5 py-1.5 rounded-xl bg-amber-500/10 dark:bg-gold24k/10 border border-amber-600/30 dark:border-gold24k/30 text-amber-900 dark:text-goldChampagne text-xs font-mono hover:bg-amber-500/20 transition flex items-center gap-1.5">
+          <span>📷</span> Change
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        
+        <!-- Photo 2: Executive Studio Portrait (White Backdrop) -->
+        <div class="rounded-2xl overflow-hidden bg-white dark:bg-obsidian border border-slate-200 dark:border-white/10 flex flex-col group shadow-md hover:border-gold24k/50 transition">
+          <div class="aspect-[4/3] relative overflow-hidden bg-white flex items-center justify-center">
+            <img id="photoSlot2" src="" alt="Mr. Prakash Kumar - Visionary Guidance" class="w-full h-full object-cover object-top transition duration-500 group-hover:scale-105" />
+            
+            <!-- Quick Replace Overlay -->
+            <label class="absolute inset-0 bg-black/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all flex flex-col items-center justify-center cursor-pointer text-white text-xs font-mono gap-1 z-20">
+              <span class="text-2xl">📸</span>
+              <span class="bg-black/70 px-3 py-1 rounded-full border border-gold24k/40">Change Photo</span>
+              <input type="file" accept="image/*" class="hidden" onchange="uploadPhotoDirect(this, 'boss_photo_gallery1', 'photoSlot2')">
+            </label>
+          </div>
+          <div class="p-4 bg-amber-50/50 dark:bg-obsidianCard/80 border-t border-slate-200 dark:border-white/5">
+            <span class="text-[10px] font-mono text-amber-700 dark:text-gold24k uppercase font-bold tracking-wider">LEADERSHIP & STATURE</span>
+            <h4 class="text-sm font-cinzel font-bold text-slate-900 dark:text-white mt-0.5">Visionary Foresight</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+              Leading with poise, strategic depth, and high standards of excellence that inspire everyone to reach greater heights.
+            </p>
+          </div>
+        </div>
+
+        <!-- Photo 3: Relaxed Reclining Portrait (Warm Traditional Cushions) -->
+        <div class="rounded-2xl overflow-hidden bg-white dark:bg-obsidian border border-slate-200 dark:border-white/10 flex flex-col group shadow-md hover:border-gold24k/50 transition">
+          <div class="aspect-[4/3] relative overflow-hidden bg-amber-50 dark:bg-obsidianDeep flex items-center justify-center">
+            <img id="photoSlot3" src="" alt="Mr. Prakash Kumar - Warmth & Positivity" class="w-full h-full object-cover object-center transition duration-500 group-hover:scale-105" />
+            
+            <!-- Quick Replace Overlay -->
+            <label class="absolute inset-0 bg-black/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all flex flex-col items-center justify-center cursor-pointer text-white text-xs font-mono gap-1 z-20">
+              <span class="text-2xl">📸</span>
+              <span class="bg-black/70 px-3 py-1 rounded-full border border-gold24k/40">Change Photo</span>
+              <input type="file" accept="image/*" class="hidden" onchange="uploadPhotoDirect(this, 'boss_photo_gallery2', 'photoSlot3')">
+            </label>
+          </div>
+          <div class="p-4 bg-amber-50/50 dark:bg-obsidianCard/80 border-t border-slate-200 dark:border-white/5">
+            <span class="text-[10px] font-mono text-amber-700 dark:text-gold24k uppercase font-bold tracking-wider">WARMTH & CHARISMA</span>
+            <h4 class="text-sm font-cinzel font-bold text-slate-900 dark:text-white mt-0.5">Inspiring Demeanor</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+              Your genuine smile, optimism, and approachable spirit make working with you an enriching and joyful journey.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Minimal Clean Footer -->
+    <footer class="text-center py-6 text-xs font-mono text-slate-500 dark:text-slate-400 space-y-1 border-t border-slate-200 dark:border-white/10">
+      <p class="text-amber-900 dark:text-goldChampagne font-cinzel font-semibold tracking-wider">MR. PRAKASH KUMAR • 20TH OCTOBER CELEBRATION</p>
+      <p>Heartfelt birthday greetings dedicated by Thilipkumar</p>
+    </footer>
+
+  </main>
+
+  <!-- ============================================================ -->
+  <!-- PHOTO MANAGER MODAL (Direct Multi-Photo Selector)            -->
+  <!-- ============================================================ -->
+  <div id="photoModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="card-glass rounded-3xl max-w-md w-full p-6 relative foil-gold shadow-2xl">
+      
+      <button onclick="closePhotoModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 dark:hover:text-white text-lg">
+        ✕
+      </button>
+
+      <div class="flex items-center gap-2 mb-1">
+        <span class="text-xl">📸</span>
+        <h3 class="font-cinzel font-bold text-lg text-slate-900 dark:text-white">Photo Manager</h3>
+      </div>
+      <p class="text-xs font-mono text-slate-500 dark:text-slate-400 mb-6">
+        Select your photos directly from your device. They are immediately saved into your browser's persistent memory.
+      </p>
+
+      <div class="space-y-4 font-mono text-xs">
+        <!-- Photo 1 -->
+        <div class="p-3 rounded-xl bg-amber-50 dark:bg-obsidianDeep border border-amber-900/10 dark:border-white/10 flex items-center justify-between">
+          <div>
+            <div class="font-bold text-slate-900 dark:text-white">Photo 1: Tuxedo Suit Portrait</div>
+            <div class="text-[10px] text-slate-500 dark:text-slate-400">Dark Backdrop • Main Bevel Card</div>
+          </div>
+          <label class="cursor-pointer px-3 py-1.5 rounded-lg bg-amber-500/10 dark:bg-gold24k/10 text-amber-900 dark:text-goldChampagne border border-amber-600/30 dark:border-gold24k/30 hover:bg-amber-500/20 transition">
+            Upload
+            <input type="file" accept="image/*" class="hidden" onchange="uploadPhotoDirect(this, 'boss_photo_hero', 'photoSlot1')">
+          </label>
+        </div>
+
+        <!-- Photo 2 -->
+        <div class="p-3 rounded-xl bg-amber-50 dark:bg-obsidianDeep border border-amber-900/10 dark:border-white/10 flex items-center justify-between">
+          <div>
+            <div class="font-bold text-slate-900 dark:text-white">Photo 2: Studio Suit Portrait</div>
+            <div class="text-[10px] text-slate-500 dark:text-slate-400">White Backdrop • Visionary Stature</div>
+          </div>
+          <label class="cursor-pointer px-3 py-1.5 rounded-lg bg-amber-500/10 dark:bg-gold24k/10 text-amber-900 dark:text-goldChampagne border border-amber-600/30 dark:border-gold24k/30 hover:bg-amber-500/20 transition">
+            Upload
+            <input type="file" accept="image/*" class="hidden" onchange="uploadPhotoDirect(this, 'boss_photo_gallery1', 'photoSlot2')">
+          </label>
+        </div>
+
+        <!-- Photo 3 -->
+        <div class="p-3 rounded-xl bg-amber-50 dark:bg-obsidianDeep border border-amber-900/10 dark:border-white/10 flex items-center justify-between">
+          <div>
+            <div class="font-bold text-slate-900 dark:text-white">Photo 3: Cheerful Reclining Portrait</div>
+            <div class="text-[10px] text-slate-500 dark:text-slate-400">Traditional Cushions • Warmth & Joy</div>
+          </div>
+          <label class="cursor-pointer px-3 py-1.5 rounded-lg bg-amber-500/10 dark:bg-gold24k/10 text-amber-900 dark:text-goldChampagne border border-amber-600/30 dark:border-gold24k/30 hover:bg-amber-500/20 transition">
+            Upload
+            <input type="file" accept="image/*" class="hidden" onchange="uploadPhotoDirect(this, 'boss_photo_gallery2', 'photoSlot3')">
+          </label>
+        </div>
+      </div>
+
+      <div class="mt-6 flex items-center justify-between pt-4 border-t border-slate-200 dark:border-white/10">
+        <button onclick="restoreDefaults()" class="text-xs font-mono text-amber-700 dark:text-gold24k hover:underline">
+          Reset Default Art
+        </button>
+        <button onclick="closePhotoModal()" class="px-5 py-2 rounded-xl text-xs font-cinzel font-bold bg-gold24k text-black hover:bg-amber-300 transition">
+          Done
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TOAST PILL -->
+  <div id="toastPill" class="toast-pill fixed bottom-6 right-6 z-50 bg-gradient-to-r from-gold24k to-amber-300 text-black px-4 py-2.5 rounded-xl font-mono text-xs font-bold shadow-2xl flex items-center gap-2">
+    <span>✨</span>
+    <span id="toastText">Action Confirmed</span>
+  </div>
+
+  <!-- JAVASCRIPT ENGINE -->
+  <script>
+    // -------------------------------------------------------------
+    // HIGH-RESOLUTION EXECUTIVE SVG FALLBACKS (Zero Broken Links)
+    // -------------------------------------------------------------
+    const defaultHeroSVG = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 750' width='600' height='750'><rect width='600' height='750' fill='%2305070B'/><radialGradient id='g1' cx='50%25' cy='35%25' r='50%25'><stop offset='0%25' stop-color='%231F293D'/><stop offset='100%25' stop-color='%2305070B'/></radialGradient><circle cx='300' cy='280' r='180' fill='url(%23g1)'/><circle cx='300' cy='240' r='90' fill='%23A07253'/><path d='M230 180 Q300 130 370 180 Q350 160 300 160 Q250 160 230 180 Z' fill='%231A1512'/><rect x='245' y='215' width='45' height='22' rx='4' fill='none' stroke='%23C5A059' stroke-width='3'/><rect x='310' y='215' width='45' height='22' rx='4' fill='none' stroke='%23C5A059' stroke-width='3'/><line x1='290' y1='226' x2='310' y2='226' stroke='%23C5A059' stroke-width='3'/><path d='M275 275 Q300 295 325 275' fill='none' stroke='%23FFFFFF' stroke-width='4' stroke-linecap='round'/><path d='M292 295 L308 295 L300 305 Z' fill='%231A1512'/><path d='M160 750 L220 370 L300 450 L380 370 L440 750 Z' fill='%230F131A'/><polygon points='300,450 265,360 335,360' fill='%23FFFFFF'/><polygon points='300,400 288,570 300,600 312,570' fill='%23090B0F'/><polygon points='220,370 270,510 300,450' fill='%23161C26'/><polygon points='380,370 330,510 300,450' fill='%23161C26'/><text x='300' y='690' fill='%23D4AF37' font-family='sans-serif' font-size='16' font-weight='bold' letter-spacing='4' text-anchor='middle'>MR. PRAKASH KUMAR</text><text x='300' y='715' fill='%238892B0' font-family='sans-serif' font-size='12' letter-spacing='2' text-anchor='middle'>EXECUTIVE PORTRAIT</text></svg>";
+
+    const defaultGallery1SVG = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 450' width='600' height='450'><rect width='600' height='450' fill='%23F8FAFC'/><circle cx='300' cy='180' r='140' fill='%23E2E8F0'/><circle cx='300' cy='160' r='75' fill='%23A07253'/><path d='M240 115 Q300 80 360 115 Q340 100 300 100 Q260 100 240 115 Z' fill='%231A1512'/><rect x='255' y='142' width='38' height='18' rx='3' fill='none' stroke='%23334155' stroke-width='2.5'/><rect x='307' y='142' width='38' height='18' rx='3' fill='none' stroke='%23334155' stroke-width='2.5'/><line x1='293' y1='151' x2='307' y2='151' stroke='%23334155' stroke-width='2.5'/><path d='M180 450 L230 250 L300 310 L370 250 L420 450 Z' fill='%231E293B'/><polygon points='300,310 270,240 330,240' fill='%23FFFFFF'/><polygon points='300,270 290,400 300,420 310,400' fill='%230F172A'/><text x='300' y='425' fill='%230F172A' font-family='sans-serif' font-size='12' font-weight='bold' letter-spacing='3' text-anchor='middle'>VISIONARY STATURE</text></svg>";
+
+    const defaultGallery2SVG = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 450' width='600' height='450'><rect width='600' height='450' fill='%23FFFDF7'/><rect x='80' y='220' width='110' height='160' rx='20' fill='%23DC2626'/><line x1='80' y1='260' x2='190' y2='260' stroke='%23000' stroke-width='14'/><line x1='80' y1='320' x2='190' y2='320' stroke='%23000' stroke-width='14'/><rect x='410' y='220' width='110' height='160' rx='20' fill='%23DC2626'/><line x1='410' y1='260' x2='520' y2='260' stroke='%23000' stroke-width='14'/><line x1='410' y1='320' x2='520' y2='320' stroke='%23000' stroke-width='14'/><circle cx='280' cy='150' r='60' fill='%23A07253'/><path d='M235 110 Q280 80 325 110 Q310 95 280 95 Q250 95 235 110 Z' fill='%231A1512'/><rect x='250' y='135' width='28' height='14' rx='3' fill='none' stroke='%23334155' stroke-width='2'/><rect x='285' y='135' width='28' height='14' rx='3' fill='none' stroke='%23334155' stroke-width='2'/><path d='M260 175 Q280 195 300 175' fill='none' stroke='%23FFFFFF' stroke-width='3.5' stroke-linecap='round'/><path d='M210 400 L250 200 L340 210 L370 400 Z' fill='%23FEF08A'/><text x='300' y='425' fill='%23996515' font-family='sans-serif' font-size='12' font-weight='bold' letter-spacing='3' text-anchor='middle'>WARMTH & CHARISMA</text></svg>";
+
+    // 1. LIGHT & DARK THEME ENGINE
+    function initTheme() {
+      const saved = localStorage.getItem('boss_theme');
+      if (saved === 'light') {
+        document.documentElement.classList.remove('dark');
+        document.getElementById('themeIcon').innerText = '☀️';
+      } else {
+        document.documentElement.classList.add('dark');
+        document.getElementById('themeIcon').innerText = '🌙';
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('boss_theme', isDark ? 'dark' : 'light');
+      document.getElementById('themeIcon').innerText = isDark ? '🌙' : '☀️';
+      showToast(isDark ? "Dark theme enabled" : "Warm Ivory theme enabled");
+    }
+
+    // 2. PROCEDURAL CHIMES (Web Audio API)
+    let audioCtx = null;
+    let audioEnabled = true;
+
+    function getAudioCtx() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function toggleAudio() {
+      audioEnabled = !audioEnabled;
+      document.getElementById('audioIcon').innerText = audioEnabled ? '🔊' : '🔇';
+      showToast(audioEnabled ? "Chimes enabled" : "Chimes muted");
+    }
+
+    function playTone(freq, delay = 0, duration = 0.6, type = 'sine', gainVal = 0.12) {
+      if (!audioEnabled) return;
+      try {
+        const ctx = getAudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+
+        gain.gain.setValueAtTime(0.0001, ctx.currentTime + delay);
+        gain.gain.exponentialRampToValueAtTime(gainVal, ctx.currentTime + delay + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + delay + duration);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(ctx.currentTime + delay);
+        osc.stop(ctx.currentTime + delay + duration + 0.1);
+      } catch (e) {}
+    }
+
+    function playChimeFanfare() {
+      const chord = [523.25, 659.25, 783.99, 987.77, 1046.50];
+      chord.forEach((freq, idx) => {
+        playTone(freq, idx * 0.08, 0.9, 'triangle', 0.14);
+      });
+    }
+
+    // 3. GOLDEN STARDUST CANVAS
+    function initStardust() {
+      const canvas = document.getElementById('stardustCanvas');
+      const ctx = canvas.getContext('2d');
+      let w = canvas.width = window.innerWidth;
+      let h = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      });
+
+      const count = 40;
+      const pts = [];
+
+      for (let i = 0; i < count; i++) {
+        pts.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 1.8 + 0.6,
+          vy: -(Math.random() * 0.35 + 0.15),
+          vx: (Math.random() - 0.5) * 0.25,
+          alpha: Math.random() * 0.5 + 0.25,
+        });
+      }
+
+      function loop() {
+        ctx.clearRect(0, 0, w, h);
+        const isDark = document.documentElement.classList.contains('dark');
+        
+        pts.forEach(p => {
+          p.y += p.vy;
+          p.x += p.vx;
+          if (p.y < 0) p.y = h;
+          if (p.x < 0) p.x = w;
+          if (p.x > w) p.x = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = isDark
+            ? `rgba(212, 175, 55, ${p.alpha})`
+            : `rgba(184, 134, 11, ${p.alpha * 0.8})`;
+          ctx.fill();
+        });
+        requestAnimationFrame(loop);
+      }
+      loop();
+    }
+
+    // 4. UNBOXING CARD
+    function openExecutiveCard() {
+      playChimeFanfare();
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 120,
+          spread: 90,
+          origin: { y: 0.6 },
+          colors: ['#D4AF37', '#F3E5AB', '#996515', '#FFFFFF']
+        });
+      }
+
+      const gate = document.getElementById('envelopeGate');
+      const main = document.getElementById('mainCardSection');
+
+      gate.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+      gate.style.transform = 'scale(0.9) translateY(-50px)';
+      gate.style.opacity = '0';
+
+      setTimeout(() => {
+        gate.style.display = 'none';
+        main.classList.remove('hidden');
+        setTimeout(() => {
+          main.classList.remove('opacity-0');
+          initScratch();
+          main.scrollIntoView({ behavior: 'smooth' });
+        }, 50);
+      }, 750);
+    }
+
+    // 5. COUNTDOWN TIMER TO OCTOBER 20TH
+    function updateCountdown() {
+      const now = new Date();
+      let targetYear = now.getFullYear();
+      let targetDate = new Date(targetYear, 9, 20, 0, 0, 0); // October = index 9
+      if (now > targetDate) {
+        targetDate = new Date(targetYear + 1, 9, 20, 0, 0, 0);
+      }
+
+      const diff = targetDate - now;
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / 1000 / 60) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('cDays').innerText = String(d).padStart(2, '0');
+      document.getElementById('cHours').innerText = String(h).padStart(2, '0');
+      document.getElementById('cMins').innerText = String(m).padStart(2, '0');
+      document.getElementById('cSecs').innerText = String(s).padStart(2, '0');
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // 6. CAKE CANDLES INTERACTION
+    const candleFlames = [
+      document.getElementById('candleFlame0'),
+      document.getElementById('candleFlame1'),
+      document.getElementById('candleFlame2')
+    ];
+
+    function snuffCandle(idx) {
+      if (candleFlames[idx]) {
+        candleFlames[idx].classList.toggle('snuffed');
+        playTone(700 + idx * 80, 0, 0.25);
+        if (candleFlames.every(f => f.classList.contains('snuffed'))) {
+          playChimeFanfare();
+          if (typeof confetti === 'function') {
+            confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+          }
+          showToast("All candles snuffed! Happy Birthday, Prakash Sir!");
+        }
+      }
+    }
+
+    function blowAllCandles() {
+      candleFlames.forEach(f => f.classList.add('snuffed'));
+      playChimeFanfare();
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 130,
+          spread: 95,
+          origin: { y: 0.6 },
+          colors: ['#D4AF37', '#F3E5AB', '#996515', '#FFFFFF']
+        });
+      }
+      showToast("Wishes delivered to Prakash Sir! 🎂✨");
+    }
+
+    // 7. GOLD SCRATCH CANVAS
+    let scratchReady = false;
+    function initScratch() {
+      if (scratchReady) return;
+      scratchReady = true;
+
+      const canvas = document.getElementById('scratchCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+
+      const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      grad.addColorStop(0, '#AA771C');
+      grad.addColorStop(0.35, '#F3E5AB');
+      grad.addColorStop(0.7, '#D4AF37');
+      grad.addColorStop(1, '#8C6D1F');
+
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.75)';
+      ctx.font = 'bold 12px "JetBrains Mono", monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('✦ SCRATCH TO REVEAL BLESSING ✦', canvas.width / 2, canvas.height / 2 + 4);
+
+      let active = false;
+
+      function scratch(e) {
+        if (!active) return;
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
+
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(x, y, 22, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      canvas.addEventListener('mousedown', () => active = true);
+      canvas.addEventListener('touchstart', () => active = true);
+      window.addEventListener('mouseup', () => active = false);
+      window.addEventListener('touchend', () => active = false);
+      canvas.addEventListener('mousemove', scratch);
+      canvas.addEventListener('touchmove', scratch);
+    }
+
+    function revealScratch() {
+      const canvas = document.getElementById('scratchCanvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        playChimeFanfare();
+        if (typeof confetti === 'function') {
+          confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
+        }
+        showToast("Birthday blessing revealed!");
+      }
+    }
+
+    // 8. ROBUST PHOTO MANAGER ENGINE (Zero Broken Images)
+    function openPhotoModal() {
+      document.getElementById('photoModal').classList.remove('hidden');
+    }
+
+    function closePhotoModal() {
+      document.getElementById('photoModal').classList.add('hidden');
+    }
+
+    function uploadPhotoDirect(input, storageKey, elementId) {
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const base64Data = e.target.result;
+          try {
+            localStorage.setItem(storageKey, base64Data);
+          } catch(err) {
+            console.warn("Storage quota limit reached", err);
+          }
+          const img = document.getElementById(elementId);
+          if (img) img.src = base64Data;
+          showToast("Photo loaded successfully!");
+          playTone(740, 0, 0.2);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function loadAllPhotos() {
+      const hero = localStorage.getItem('boss_photo_hero') || defaultHeroSVG;
+      const g1 = localStorage.getItem('boss_photo_gallery1') || defaultGallery1SVG;
+      const g2 = localStorage.getItem('boss_photo_gallery2') || defaultGallery2SVG;
+
+      const imgHero = document.getElementById('photoSlot1');
+      const imgG1 = document.getElementById('photoSlot2');
+      const imgG2 = document.getElementById('photoSlot3');
+
+      if (imgHero) {
+        imgHero.src = hero;
+        imgHero.onerror = () => { imgHero.src = defaultHeroSVG; };
+      }
+      if (imgG1) {
+        imgG1.src = g1;
+        imgG1.onerror = () => { imgG1.src = defaultGallery1SVG; };
+      }
+      if (imgG2) {
+        imgG2.src = g2;
+        imgG2.onerror = () => { imgG2.src = defaultGallery2SVG; };
+      }
+    }
+
+    function restoreDefaults() {
+      localStorage.removeItem('boss_photo_hero');
+      localStorage.removeItem('boss_photo_gallery1');
+      localStorage.removeItem('boss_photo_gallery2');
+      loadAllPhotos();
+      showToast("Reset to default artwork");
+    }
+
+    // 9. TOAST ENGINE
+    function showToast(msg) {
+      const pill = document.getElementById('toastPill');
+      const text = document.getElementById('toastText');
+      text.innerText = msg;
+      pill.classList.add('show');
+      setTimeout(() => {
+        pill.classList.remove('show');
+      }, 2500);
+    }
+
+    // Initialize on page ready
+    window.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      initStardust();
+      loadAllPhotos();
+    });
+  </script>
+</body>
+</html>
