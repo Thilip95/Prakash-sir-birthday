@@ -280,37 +280,6 @@
   <!-- ============================================================ -->
   <main id="mainCardSection" class="relative z-10 max-w-4xl mx-auto px-4 py-8 space-y-10 hidden opacity-0 transition-opacity duration-700">
 
-    <!-- LIVE CELEBRATION COUNTDOWN -->
-    <div class="card-glass rounded-2xl p-4 sm:p-5 foil-gold text-center">
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-        <!-- <div class="text-left">
-         <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-amber-700 dark:text-cyan-400 font-semibold">CELEBRATION MILESTONE</span> 
-          <h3 class="text-base sm:text-lg font-cinzel font-bold text-slate-900 dark:text-white">Birthday Commemoration • 20th October</h3>
-        </div> -->
-        <!-- <div class="flex items-center gap-3 font-mono">
-          <!-- <div class="bg-amber-50 dark:bg-obsidianDeep px-3.5 py-1.5 rounded-lg border border-amber-900/15 dark:border-gold24k/20 text-center">
-            <span id="cDays" class="text-lg sm:text-xl font-bold text-amber-900 dark:text-goldChampagne">00</span>
-            <span class="text-[9px] block text-slate-500 dark:text-slate-400">DAYS</span>
-          </div> -->
-          <!-- <span class="text-gold24k font-bold">:</span> -->
-          <!-- <div class="bg-amber-50 dark:bg-obsidianDeep px-3.5 py-1.5 rounded-lg border border-amber-900/15 dark:border-gold24k/20 text-center">
-            <span id="cHours" class="text-lg sm:text-xl font-bold text-amber-900 dark:text-goldChampagne">00</span>
-            <span class="text-[9px] block text-slate-500 dark:text-slate-400">HOURS</span>
-          </div> -->
-          <!-- <span class="text-gold24k font-bold">:</span>
-          <div class="bg-amber-50 dark:bg-obsidianDeep px-3.5 py-1.5 rounded-lg border border-amber-900/15 dark:border-gold24k/20 text-center">
-            <span id="cMins" class="text-lg sm:text-xl font-bold text-amber-900 dark:text-goldChampagne">00</span>
-            <span class="text-[9px] block text-slate-500 dark:text-slate-400">MINS</span>
-          </div>
-          <span class="text-gold24k font-bold">:</span>
-          <div class="bg-amber-50 dark:bg-obsidianDeep px-3.5 py-1.5 rounded-lg border border-amber-900/15 dark:border-gold24k/20 text-center">
-            <span id="cSecs" class="text-lg sm:text-xl font-bold text-amber-900 dark:text-goldChampagne">00</span>
-            <span class="text-[9px] block text-slate-500 dark:text-slate-400">SECS</span>
-          </div> -->
-        </div>
-      </div>
-    </div>
-
     <!-- THE GRAND EXECUTIVE GREETING CARD -->
     <article class="card-glass rounded-3xl p-6 sm:p-12 foil-gold relative overflow-hidden shadow-2xl">
       
@@ -775,30 +744,7 @@
       }, 750);
     }
 
-    // 5. COUNTDOWN TIMER TO OCTOBER 20TH
-    function updateCountdown() {
-      const now = new Date();
-      let targetYear = now.getFullYear();
-      let targetDate = new Date(targetYear, 9, 20, 0, 0, 0); // October = index 9
-      if (now > targetDate) {
-        targetDate = new Date(targetYear + 1, 9, 20, 0, 0, 0);
-      }
-
-      const diff = targetDate - now;
-      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const m = Math.floor((diff / 1000 / 60) % 60);
-      const s = Math.floor((diff / 1000) % 60);
-
-      document.getElementById('cDays').innerText = String(d).padStart(2, '0');
-      document.getElementById('cHours').innerText = String(h).padStart(2, '0');
-      document.getElementById('cMins').innerText = String(m).padStart(2, '0');
-      document.getElementById('cSecs').innerText = String(s).padStart(2, '0');
-    }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    // 6. CAKE CANDLES INTERACTION
+    // 5. CAKE CANDLES INTERACTION
     const candleFlames = [
       document.getElementById('candleFlame0'),
       document.getElementById('candleFlame1'),
@@ -833,7 +779,7 @@
       showToast("Wishes delivered to Prakash Sir! 🎂✨");
     }
 
-    // 7. GOLD SCRATCH CANVAS
+    // 6. GOLD SCRATCH CANVAS
     let scratchReady = false;
     function initScratch() {
       if (scratchReady) return;
@@ -897,7 +843,7 @@
       }
     }
 
-    // 8. ROBUST PHOTO MANAGER ENGINE (Zero Broken Images)
+    // 7. ROBUST PHOTO MANAGER ENGINE (Zero Broken Images)
     function openPhotoModal() {
       document.getElementById('photoModal').classList.remove('hidden');
     }
@@ -929,7 +875,8 @@
     function loadAllPhotos() {
       const hero = "https://prakashkumar-three.vercel.app/boss1.jpeg";
       const g1 = "https://prakashkumar-three.vercel.app/boss2.jpeg";
-      const g2 =  "https://prakashkumar-three.vercel.app/boss5.jpeg";
+      const g2 = "https://prakashkumar-three.vercel.app/boss5.jpeg";
+
       const imgHero = document.getElementById('photoSlot1');
       const imgG1 = document.getElementById('photoSlot2');
       const imgG2 = document.getElementById('photoSlot3');
@@ -956,7 +903,7 @@
       showToast("Reset to default artwork");
     }
 
-    // 9. TOAST ENGINE
+    // 8. TOAST ENGINE
     function showToast(msg) {
       const pill = document.getElementById('toastPill');
       const text = document.getElementById('toastText');
