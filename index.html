@@ -927,10 +927,9 @@
     }
 
     function loadAllPhotos() {
-      const hero = localStorage.getItem('boss_photo_hero') || defaultHeroSVG;
-      const g1 = localStorage.getItem('boss_photo_gallery1') || defaultGallery1SVG;
-      const g2 = localStorage.getItem('boss_photo_gallery2') || defaultGallery2SVG;
-
+      const hero = "https://prakashkumar-three.vercel.app/boss1.jpeg";
+      const g1 = "https://prakashkumar-three.vercel.app/boss2.jpeg";
+      const g2 =  "https://prakashkumar-three.vercel.app/boss5.jpeg";
       const imgHero = document.getElementById('photoSlot1');
       const imgG1 = document.getElementById('photoSlot2');
       const imgG2 = document.getElementById('photoSlot3');
